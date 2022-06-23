@@ -1,6 +1,6 @@
 import './App.css';
 import * as React from 'react';
-import {useState,useEffect} from 'react'
+import {useState,useEffect,useRef} from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -16,24 +16,31 @@ const darkTheme = createTheme({
 });
 
 
+/// Getting Data from the local storage
 const getLocalTasks=()=>{
   let tasks=localStorage.getItem('tasks');
   if(tasks) return JSON.parse(tasks);
   return [];
 }
-
 const getLocalDoneTasks=()=>{
   let doneTasks=localStorage.getItem('doneTasks');
   if(doneTasks) return JSON.parse(doneTasks);
   return [];
 }
 
+
+
 function App() {
-  const textInput = React.useRef(null);
+  ///States 
   const [tasks, setTasks] = useState(getLocalTasks())
   const [task, setTask] = useState('')
   const [doneTasks, setDoneTasks] = useState(getLocalDoneTasks())
 
+
+  const textInput = useRef(null);
+
+
+  ///All click handlers
   const handleAdd=()=>{
     if(task) {setTasks([task,...tasks]); setTask(''); textInput.current.value = ""};
   }
@@ -54,11 +61,14 @@ function App() {
     setTasks(updatedTasks);   
   }
 
+
+  /// Setting data to local storage
   useEffect(() => {
    localStorage.setItem('tasks',JSON.stringify(tasks)) 
    localStorage.setItem('doneTasks',JSON.stringify(doneTasks)) 
   }, [tasks,doneTasks])
   
+
   return (
   <div className="App" 
     style={{minHeight:'100vh', height: "100%" ,backgroundColor:'#161717'}}>

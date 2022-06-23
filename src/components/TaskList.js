@@ -14,19 +14,16 @@ const darkTheme = createTheme({
 });
 
 
-function TaskList(props) {
-    let tasks=props.tasks;
-    let doneTasks=props.doneTasks;
+function TaskList({tasks,doneTasks,handleDone}) {
+
   return (
     <ThemeProvider theme={darkTheme}>
-
-
     <div>
-        {
+        { // Rendering list of tasks which are added and yet to be done.
             tasks.map((task,index)=>
             <div key={index}>
 
-                    <Card  onClick={()=>props.handleDone(index)} sx={{marginTop:'5px',border:'1px solid grey'}}>
+                    <Card  onClick={()=>handleDone(index)} sx={{marginTop:'5px',border:'1px solid grey'}}>
                         <CardActionArea>
                             <CardContent>
                                 <Typography variant="body2" color="text.primary">
@@ -38,7 +35,7 @@ function TaskList(props) {
             </div>
             )
         }
-        {
+        {// Rendering list of tasks which are added and marked as done.
             doneTasks.map((doneTask,index)=>
             <div key={index}>
 
