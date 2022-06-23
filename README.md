@@ -2,7 +2,7 @@
 
 https://to-do-app-netlify.netlify.app/
 
-## UI Instructions\
+## UI Instructions:
 #TextField is to add the task\
 #ADD Button pushes the task into todo list.\
 #Added tasks will be displayed in the form of list.\
